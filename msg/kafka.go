@@ -4,6 +4,8 @@ import (
 	"github.com/Shopify/sarama"
 	"time"
 	"gaemonitor/logg"
+	"gaemonitor/conf"
+	"strings"
 )
 
 var asyncProducer sarama.AsyncProducer
@@ -13,7 +15,7 @@ func init() {
 	config.Producer.Return.Successes = true
 	config.Producer.Timeout = time.Second * 5
 
-	p, err := sarama.NewAsyncProducer([]string{"10.150.182.11:8092"}, config)
+	p, err := sarama.NewAsyncProducer(strings.Split(conf.AppConfig.BrokerList, ","), config)
 	if nil != err {
 		panic(err)
 	}

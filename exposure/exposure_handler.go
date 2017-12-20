@@ -10,6 +10,7 @@ import (
 	"strconv"
 )
 
+// 1像素gif图片
 var imageBuf []byte
 
 func init()  {
@@ -31,6 +32,7 @@ func HttpHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	// 取sid参数
 	req.ParseForm()
 	sid, exist := req.Form["sid"]
 	if exist {
@@ -39,6 +41,7 @@ func HttpHandler(w http.ResponseWriter, req *http.Request) {
 	}
 
 
+	// 返回图片
 	w.Header().Add("Content-Type", "image/gif")
 	w.Write(imageBuf)
 }
